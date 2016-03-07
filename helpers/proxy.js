@@ -11,12 +11,8 @@ var autodocProxy = function() {
     var public = {};
 
     public.proxyGetRequest = function(req, cb) {
-        if (req.query) {
-            var url = req.query.url;
-        } else {
-            return cb(new Error('Invalid url provided'));
-        }
-        requestProxy.makeGetCall(url, req.body, req.headers,
+        var url = req.query.url;
+        requestProxy.makeGetCall(url, req.query, req.headers,
             function(err, body, response) {
                 if (err) {
                     return cb(err, body, response);
@@ -27,9 +23,66 @@ var autodocProxy = function() {
                 };
                 var blueprint = parser.format(parsedPair);
                 console.log(blueprint);
+                body = JSON.parse(body);
                 return cb(err, body, response);
             });
-    }
+    };
+
+    public.proxyPostRequest = function(req, cb){
+        var url = req.query.url, isForm = false;
+        if(req.headers['content-type'] == 'application/x-www-form-urlencoded')
+            isForm = true;
+        requestProxy.makePostCall(url, req.body, req.headers,
+            function(err, body, response) {
+                if (err) {
+                    return cb(err, body, response);
+                }
+                var parsedPair = {
+                    'request': response.request,
+                    'response': response
+                };
+                var blueprint = parser.format(parsedPair);
+                console.log(blueprint);
+                body = JSON.parse(body);
+                return cb(err, body, response);
+            }, isForm);
+    };
+
+    public.proxyPatchRequest = function(req, cb){
+        var url = req.query.url;
+        requestProxy.makePatchCall(url, req.body, req.headers,
+            function(err, body, response) {
+                if (err) {
+                    return cb(err, body, response);
+                }
+                var parsedPair = {
+                    'request': response.request,
+                    'response': response
+                };
+                var blueprint = parser.format(parsedPair);
+                console.log(blueprint);
+                body = JSON.parse(body);
+                return cb(err, body, response);
+            });
+    };
+
+    public.proxyDeleteRequest = function(req, cb){
+        var url = req.query.url;
+        requestProxy.makeDeleteCall(url, req.headers,
+            function(err, body, response) {
+                if (err) {
+                    return cb(err, body, response);
+                }
+                var parsedPair = {
+                    'request': response.request,
+                    'response': response
+                };
+                var blueprint = parser.format(parsedPair);
+                console.log(blueprint);
+                body = JSON.parse(body);
+                return cb(err, body, response);
+            });
+    };
     return public;
 }
 
