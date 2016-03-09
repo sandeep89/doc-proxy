@@ -23,21 +23,25 @@ router.get('/', function(req, res, next) {
 router.route('/proxy')
     .get(function(req, res, next) {
         proxy.proxyGetRequest(req, function(err, body, response) {
+            if (err) return next(err);
             return res.status(response.statusCode).json(body);
         });
     })
     .post(function(req, res, next) {
         proxy.proxyPostRequest(req, function(err, body, response) {
+            if (err) return next(err);
             return res.status(response.statusCode).json(body);
         });
     })
     .patch(function(req, res, next) {
         proxy.proxyPatchRequest(req, function(err, body, response) {
+            if (err) return next(err);
             return res.status(response.statusCode).json(body);
         });
     })
     .delete(function(req, res, next) {
         proxy.proxyDeleteRequest(req, function(err, body, response) {
+            if (err) return next(err);
             return res.status(response.statusCode).json(body);
         });
     });

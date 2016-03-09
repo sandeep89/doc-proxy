@@ -1,10 +1,11 @@
 /*
- *	Helper file to manage all the rquired activities for forwarding request
- * 	This file will be helpful in saving request data
+ *  Helper file to manage all the rquired activities for forwarding request
+ *  This file will be helpful in saving request data
  */
 
 var requestProxy = require('express-request-wrapper');
 var parser = require('./parser');
+var fs = require('fs');
 
 var autodocProxy = function() {
 
@@ -22,15 +23,17 @@ var autodocProxy = function() {
                     'response': response
                 };
                 var blueprint = parser.format(parsedPair);
-                console.log(blueprint);
-                body = JSON.parse(body);
-                return cb(err, body, response);
+                fs.appendFile('document.yml', blueprint, function(err) {
+                    body = JSON.parse(body);
+                    return cb(err, body, response);
+                });
             });
     };
 
-    public.proxyPostRequest = function(req, cb){
-        var url = req.query.url, isForm = false;
-        if(req.headers['content-type'] == 'application/x-www-form-urlencoded')
+    public.proxyPostRequest = function(req, cb) {
+        var url = req.query.url,
+            isForm = false;
+        if (req.headers['content-type'] == 'application/x-www-form-urlencoded')
             isForm = true;
         requestProxy.makePostCall(url, req.body, req.headers,
             function(err, body, response) {
@@ -42,13 +45,18 @@ var autodocProxy = function() {
                     'response': response
                 };
                 var blueprint = parser.format(parsedPair);
-                console.log(blueprint);
-                body = JSON.parse(body);
-                return cb(err, body, response);
+                fs.appendFile('document.yml', blueprint, function(err) {
+                    body = typeof body == 'object' ? body : JSON.parse(body);
+                    return cb(err, body, response);
+                });
             }, isForm);
     };
 
-    public.proxyPatchRequest = function(req, cb){
+    public.proxyPatchRequest = function(req, cb) {
+        var url = req.query.url,
+            isForm = false;
+        if (req.headers['content-type'] == 'application/x-www-form-urlencoded')
+            isForm = true;
         var url = req.query.url;
         requestProxy.makePatchCall(url, req.body, req.headers,
             function(err, body, response) {
@@ -60,14 +68,16 @@ var autodocProxy = function() {
                     'response': response
                 };
                 var blueprint = parser.format(parsedPair);
-                console.log(blueprint);
-                body = JSON.parse(body);
-                return cb(err, body, response);
-            });
+                fs.appendFile('document.yml', blueprint, function(err) {
+                    body = JSON.parse(body);
+                    return cb(err, body, response);
+                });
+            }, isForm);
     };
 
-    public.proxyDeleteRequest = function(req, cb){
+    public.proxyDeleteRequest = function(req, cb) {
         var url = req.query.url;
+        console.log(url);
         requestProxy.makeDeleteCall(url, req.headers,
             function(err, body, response) {
                 if (err) {
@@ -78,9 +88,9 @@ var autodocProxy = function() {
                     'response': response
                 };
                 var blueprint = parser.format(parsedPair);
-                console.log(blueprint);
-                body = JSON.parse(body);
-                return cb(err, body, response);
+                fs.appendFile('document.yml', blueprint, function(err) {
+                    return cb(err, body, response);
+                });
             });
     };
     return public;

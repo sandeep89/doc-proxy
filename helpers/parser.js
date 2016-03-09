@@ -2,43 +2,47 @@
 var format;
 
 format = function(pair) {
-  var indent, newline, output, req, res,
-    _this = this;
-  output = "";
-  indent = "    ";
-  newline = "\n";
-  req = pair['request'];
-  res = pair['response'];
-  output = "# " + req['method'] + " " + req['uri']['path'] + newline;
-  output += "+ Request" + newline;
-  output += indent + "+ Headers" + newline;
-  output += newline;
-  Object.keys(req['headers']).forEach(function(key) {
-    return output += indent + indent + indent + key + ":" + req['headers'][key] + newline;
-  });
-  output += newline;
-  if (req['body']) {
+    var indent, newline, output, req, res,
+        _this = this;
+    output = "";
+    indent = "    ";
+    newline = "\n";
+    req = pair['request'];
+    res = pair['response'];
+    output = "# " + req['method'] + " " + req['uri']['path'] + newline;
+    output += "+ Request" + newline;
+    output += indent + "+ Headers" + newline;
+    output += newline;
+    Object.keys(req['headers']).forEach(function(key) {
+        return output += indent + indent + indent + key + ":" + req['headers'][key] + newline;
+    });
+    output += newline;
+    if (req['body']) {
+        output += indent + "+ Body" + newline;
+        output += newline;
+        req['body'].split('\n').forEach(function(line) {
+            return output += indent + indent + indent + line + newline;
+        });
+    }
+    output += newline;
+    output += "+ Response" + " " + res['statusCode'] + newline;
+    output += indent + "+ Headers" + newline;
+    output += newline;
+    Object.keys(res['headers']).forEach(function(key) {
+        return output += indent + indent + indent + key + ":" + res['headers'][key] + newline;
+    });
+    output += newline;
     output += indent + "+ Body" + newline;
     output += newline;
-    req['body'].split('\n').forEach(function(line) {
-      return output += indent + indent + indent + line + newline;
-    });
-  }
-  output += newline;
-  output += "+ Response" + " " + res['statusCode'] + newline;
-  output += indent + "+ Headers" + newline;
-  output += newline;
-  Object.keys(res['headers']).forEach(function(key) {
-    return output += indent + indent + indent + key + ":" + res['headers'][key] + newline;
-  });
-  output += newline;
-  output += indent + "+ Body" + newline;
-  output += newline;
-  res['body'].split('\n').forEach(function(line) {
-    return output += indent + indent + indent + line + newline;
-  });
-  output += newline;
-  return output;
+    output += indent + indent + indent + res['body'] + newline;
+    // if (res['body']) {
+    //     console.log(res['body']);
+    //     res['body'].split('\n').forEach(function(line) {
+    //         return output += indent + indent + indent + line + newline;
+    //     });
+    // }
+    output += newline;
+    return output;
 };
 
 module.exports.format = format;
