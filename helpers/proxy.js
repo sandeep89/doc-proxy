@@ -13,6 +13,7 @@ var autodocProxy = function() {
 
     public.proxyGetRequest = function(req, cb) {
         var url = req.query.url;
+            delete req.query.url;
         requestProxy.makeGetCall(url, req.query, req.headers,
             function(err, body, response) {
                 if (err) {
@@ -33,6 +34,7 @@ var autodocProxy = function() {
     public.proxyPostRequest = function(req, cb) {
         var url = req.query.url,
             isForm = false;
+            delete req.query.url;
         if (req.headers['content-type'] == 'application/x-www-form-urlencoded')
             isForm = true;
         requestProxy.makePostCall(url, req.body, req.headers,
@@ -55,6 +57,7 @@ var autodocProxy = function() {
     public.proxyPatchRequest = function(req, cb) {
         var url = req.query.url,
             isForm = false;
+            delete req.query.url;
         if (req.headers['content-type'] == 'application/x-www-form-urlencoded')
             isForm = true;
         var url = req.query.url;
@@ -77,7 +80,7 @@ var autodocProxy = function() {
 
     public.proxyDeleteRequest = function(req, cb) {
         var url = req.query.url;
-        console.log(url);
+            delete req.query.url;
         requestProxy.makeDeleteCall(url, req.headers,
             function(err, body, response) {
                 if (err) {
