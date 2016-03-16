@@ -48,7 +48,6 @@ format = function(pair) {
     output += newline;
     output += indent + "+ Body" + newline;
     output += newline;
-    console.log(typeof res['body']);
     res['body'] = typeof res['body'] == 'object' ? JSON.stringify(res['body']) : res['body'];
     output += indent + indent + indent + res['body'] + newline;
     // if (res['body']) {

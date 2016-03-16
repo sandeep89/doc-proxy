@@ -60,7 +60,6 @@ var autodocProxy = function() {
             delete req.query.url;
         if (req.headers['content-type'] == 'application/x-www-form-urlencoded')
             isForm = true;
-        var url = req.query.url;
         requestProxy.makePatchCall(url, req.body, req.headers,
             function(err, body, response) {
                 if (err) {
@@ -90,6 +89,7 @@ var autodocProxy = function() {
                     'request': response.request,
                     'response': response
                 };
+                body = body && typeof body == 'string'? JSON.parse(body) : body;
                 var blueprint = parser.format(parsedPair);
                 fs.appendFile('document.yml', blueprint, function(err) {
                     return cb(err, body, response);
