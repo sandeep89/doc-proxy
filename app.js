@@ -18,8 +18,16 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: false
+  extended: true
 }));
+app.use(function(req, res, next) {
+  delete req.headers['accept-encoding'];
+  delete req.headers['content-length'];
+  delete req.headers.host;
+  delete req.headers.cookie;
+  delete req.headers.connection;
+  next();
+})
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
