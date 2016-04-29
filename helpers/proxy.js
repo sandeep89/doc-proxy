@@ -25,7 +25,11 @@ var autodocProxy = function() {
                 };
                 var blueprint = parser.format(parsedPair);
                 fs.appendFile('document.yml', blueprint, function(err) {
-                    body = JSON.parse(body);
+                    try{
+                        body = JSON.parse(body); 
+                    }catch(er){
+                        console.log(er);
+                    }
                     return cb(err, body, response);
                 });
             });
@@ -48,7 +52,11 @@ var autodocProxy = function() {
                 };
                 var blueprint = parser.format(parsedPair);
                 fs.appendFile('document.yml', blueprint, function(err) {
-                    body = typeof body == 'object' ? body : JSON.parse(body);
+                    try {
+                        body = typeof body == 'object' ? body : JSON.parse(body);
+                    } catch(e) {
+                        console.log(e);
+                    }
                     return cb(err, body, response);
                 });
             }, isForm);
@@ -71,7 +79,11 @@ var autodocProxy = function() {
                 };
                 var blueprint = parser.format(parsedPair);
                 fs.appendFile('document.yml', blueprint, function(err) {
-                    body = JSON.parse(body);
+                    try {
+                        body = JSON.parse(body);
+                    } catch(e) {
+                        console.log(e);
+                    }
                     return cb(err, body, response);
                 });
             }, isForm);
