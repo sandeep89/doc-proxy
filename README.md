@@ -54,3 +54,7 @@ Note that the generated doc is complient to blueprint and could be safly used in
 
 # Support
 For any quries please drop a not to s4n989@gmail.com
+
+# TODO
+Integrate apiary cli to push the api documentation directly to apiary.io
+https://help.apiary.io/tools/apiary-cli/
