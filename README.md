@@ -1,12 +1,14 @@
 # Doc-proxy
 
-A node proxy server which generates blueprint documentations of all the reuquests which are forwarded using the server.
+A node proxy server which generates blueprint documentations of all the requests which are forwarded using the server.
 
 ## Setup
 
 ### Prerequisites
 
-Node version > 0.10.31 should be installed on the machine where you are trying to run the server. NPM should be available on the server
+Node version > 0.10.31 should be installed on the machine where you are trying to run the server. 
+
+NPM should be available on the machine to deploy the server
 
 ### Installation
 
