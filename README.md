@@ -53,7 +53,7 @@ Below is a sample output in document.yml file
 Note that the generated doc is complient to blueprint and could be safly used in https://apiary.io to generate documentation barebone
 
 # Support
-For any quries please drop a not to s4n989@gmail.com
+For any quries please drop a note to s4n989@gmail.com
 
 # TODO
 Integrate apiary cli to push the api documentation directly to apiary.io
