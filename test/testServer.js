@@ -29,15 +29,44 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/getEndpoint', function (req, res, next) {
 
    res.send({
-    dummy:"This is a test server and I am changing stuff",
+    dummy:"Responding to Get request",
     headers: req.headers,
     query: req.query
    });
 });
 
 app.post('/postEndpoint', function (req, res, next) {
-   /* body... */ 
-})
+   res.send({
+    dummy:"Response to POST request",
+    headers: req.headers,
+    body: req.body
+   });
+});
+
+app.put('/putEndpoint', function (req, res, next) {
+   res.send({
+    dummy:"Response to PUT request",
+    headers: req.headers,
+    body: req.body
+   });
+});
+
+app.patch('/patchEndpoint', function (req, res, next) {
+   res.send({
+    dummy:"Response to PATCH request",
+    headers: req.headers,
+    body: req.body
+   });
+});
+
+
+app.delete('/deleteEndpoint', function (req, res, next) {
+   res.send({
+    dummy:"Response to DELETE request",
+    headers: req.headers
+   });
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -52,7 +81,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.send({
       message: err.message,
       error: err
     });
@@ -63,7 +92,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  res.send( {
     message: err.message,
     error: {}
   });

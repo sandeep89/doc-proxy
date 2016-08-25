@@ -17,6 +17,7 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
-    "mocha": "^3.0.2"
+    "mocha": "^3.0.2",
+    "api-blueprint-validator-module": "https://github.com/sandeep89/api-blueprint-validator-module.git"
   }
 }
