@@ -52,6 +52,12 @@ Below is a sample output in document.yml file
 
 Note that the generated doc is complient to blueprint and could be safly used in https://apiary.io to generate documentation barebone
 
+### Testing
+To run the test cases follow below step
+1. `npm install --global mocha` (Install mocha so that it becomes a command line utility)
+2. `npm instal` 
+3. `mocha test`
+
 # Support
 For any quries please drop a note to s4n989@gmail.com
 
