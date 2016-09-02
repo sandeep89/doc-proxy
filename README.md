@@ -25,9 +25,9 @@ To log a documentation of an api send a request (currently POST, PATCH, GET and 
 
 Eg. To create documentation for endpoint /abc running on server https://www.xyz.test.com, send the request as `http://localhost:3000/proxy?url=https://www.xyz.test.com/abc`.
 
-This request would either create a file document.yml in <b>doc-proxy</b> folder or it will append the outgoing query/body and any attached headers along with incoming response from server
+This request would either create a file document.apib in <b>doc-proxy</b> folder or it will append the outgoing query/body and any attached headers along with incoming response from server
 
-Below is a sample output in document.yml file
+Below is a sample output in document.apib file
 
 ```
 # POST /abc

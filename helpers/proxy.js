@@ -6,6 +6,7 @@
 var requestProxy = require('express-request-wrapper');
 var parser = require('./parser');
 var fs = require('fs');
+var apiDocFileName = "document.apib";
 
 var autodocProxy = function() {
 
@@ -24,7 +25,7 @@ var autodocProxy = function() {
                     'response': response
                 };
                 var blueprint = parser.format(parsedPair);
-                fs.appendFile('document.yml', blueprint, function(err) {
+                fs.appendFile(apiDocFileName, blueprint, function(err) {
                     try{
                         body = JSON.parse(body); 
                     }catch(er){
@@ -51,7 +52,7 @@ var autodocProxy = function() {
                     'response': response
                 };
                 var blueprint = parser.format(parsedPair);
-                fs.appendFile('document.yml', blueprint, function(err) {
+                fs.appendFile(apiDocFileName, blueprint, function(err) {
                     try {
                         body = typeof body == 'object' ? body : JSON.parse(body);
                     } catch(e) {
@@ -78,7 +79,7 @@ var autodocProxy = function() {
                     'response': response
                 };
                 var blueprint = parser.format(parsedPair);
-                fs.appendFile('document.yml', blueprint, function(err) {
+                fs.appendFile(apiDocFileName, blueprint, function(err) {
                     try {
                         body = JSON.parse(body);
                     } catch(e) {
@@ -103,7 +104,7 @@ var autodocProxy = function() {
                 };
                 body = body && typeof body == 'string'? JSON.parse(body) : body;
                 var blueprint = parser.format(parsedPair);
-                fs.appendFile('document.yml', blueprint, function(err) {
+                fs.appendFile(apiDocFileName, blueprint, function(err) {
                     return cb(err, body, response);
                 });
             });

@@ -16,11 +16,13 @@ format = function(pair) {
     output += "+ Request" + newline;
     output += indent + "+ Headers" + newline;
     output += newline;
-    Object.keys(req['headers']).forEach(function(key) {
-        if (invalidHeaders.indexOf(key) == -1)
-            return output += indent + indent + indent + key + ":" + req['headers'][key] + newline;
-    });
-    output += newline
+    if (req.headers && req.headers.length) {
+        Object.keys(req['headers']).forEach(function(key) {
+            if (invalidHeaders.indexOf(key) == -1)
+                return output += indent + indent + indent + key + ":" + req['headers'][key] + newline;
+        });
+        output += newline
+    }
     if (req['uri']['query']) {
         output += indent + "+ Parameters" + newline;
         output += newline;
