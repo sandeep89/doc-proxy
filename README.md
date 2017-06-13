@@ -14,7 +14,7 @@ NPM should be available on the machine to deploy the server
 
 3 easy steps to setup this server 
 
-1. Check out code using git `git checkout git@github.com:sandeep89/doc-proxy.git`.
+1. Check out code using git `git clone git@github.com:sandeep89/doc-proxy.git`.
 2. Install NPM project dependencies using `npm install` in the <b>doc-proxy</b> folder.
 3. Run the server with `node bin/www` in the <b>doc-proxy</b> folder.
 
