@@ -11,12 +11,13 @@ router.use(function(req, res, next) {
         delete req.headers['user-agent'];
         next();
     } else {
-        return next(new Error('Invalid url provided'));
+        req.message = "Invalid URL provided";
     }
 });
 router.get('/', function(req, res, next) {
     res.render('index', {
-        title: 'Express'
+        title: 'Express',
+        message: req.message
     });
 });
 
