@@ -12,6 +12,7 @@ router.use(function(req, res, next) {
         next();
     } else {
         req.message = "Invalid URL provided";
+        next();
     }
 });
 router.get('/', function(req, res, next) {
